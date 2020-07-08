@@ -15,6 +15,10 @@ class Cli
     Member.see_user_profile
   end
 
+  def sign_in
+    Member.sign_in
+  end
+
   def end_app
     puts "See you next time!"
   end
@@ -41,7 +45,7 @@ class Cli
 
 
 
-  def select_type_of_workout
+  def select_type_of_workout user
     # prompt = TTY::Prompt.new
     answer = $prompt.select("Choose your workout") do |menu|
       menu.choice 'Full Body'
@@ -51,5 +55,9 @@ class Cli
       menu.choice 'Arms'
     end
     puts "You have selected a #{answer} workout."
+    new_session = GymSession.create()
+    new_workout = Workout.find_or_create_by(:body_part=>answer)
+    new_workout.gym_sessions << new_session
+    user.gym_sessions << new_session
   end
 end

@@ -9,7 +9,7 @@ loop do
   when 'Build new profile'
     app.new_user
   when 'Select your workout'
-    app.select_type_of_workout
+    app.select_type_of_workout app.sign_in
     app.workout
   when 'See user profile'
     app.see_user_profile

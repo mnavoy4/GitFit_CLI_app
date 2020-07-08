@@ -1,3 +1,4 @@
+require 'pry'
 require 'tty-prompt'
 
 class Member < ActiveRecord::Base
@@ -18,10 +19,34 @@ class Member < ActiveRecord::Base
   end
 
   def self.see_user_profile
+    user = self.sign_in
+    puts "Name: #{user[:name]}"
+    puts "Goal: #{user[:goal]}"
+    # workout_array = user.workouts.map do |workout|
+    #   workout.body_part
+    # end
+    # hash = {}
+    # workout_array.each do |value|
+    #   hash[value] ? hash[value] += 1 : hash[value] = 1
+    # end
+    puts "Workouts completed: #{self.get_user_workouts user}"
+  end
+
+  def self.sign_in
     puts "Please enter your member ID"
     member_id = gets.chomp
     found_user = self.find_by id: member_id
-    puts "Name: #{found_user[:name]}"
-    puts "Goal: #{found_user[:goal]}"
+    found_user
+  end
+
+  def self.get_user_workouts user
+    workout_array = user.workouts.map do |workout|
+      workout.body_part
+    end
+    hash = {}
+    workout_array.each do |value|
+      hash[value] ? hash[value] += 1 : hash[value] = 1
+    end
+    hash
   end
 end
