@@ -28,10 +28,6 @@ class Cli
     puts "Great job! You finished your workout."
   end
 
-  # def completed_workout
-  #   puts "Great job! You finished your workout."
-  # end
-
   def main_menu
     main_menu = $prompt.select("Main Menu") do |menu|
       menu.choice 'Build new profile'

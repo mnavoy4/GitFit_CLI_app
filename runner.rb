@@ -2,8 +2,6 @@ require_relative 'config/environment'
 require 'pry'
 require 'tty-prompt'
 
-
-# prompt = TTY::Prompt.new
 app = Cli.new
 app.welcome
 loop do
@@ -13,22 +11,14 @@ loop do
   when 'Select your workout'
     app.select_type_of_workout
     app.workout
-    # bar = TTY::ProgressBar.new("Work out in progress [:bar]", total: 30)
-    # 30.times do
-    #   sleep(0.1)
-    #   bar.advance(1)
-    # end
-    # app.completed_workout
   when 'See user profile'
     app.see_user_profile
   when 'Exit GitFit'
     app.end_app
+    binding.pry
     break
   end
 end
-
-
-
 
 # binding.pry
 # 0

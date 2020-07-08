@@ -13,7 +13,6 @@ class Member < ActiveRecord::Base
       menu.choice 'Gaining strength'
     end
     new_user = Member.create(:name=>name, :goal=>goal)
-    new_user
     puts "Nice to meet you #{name}! Let's start working towards #{goal}!"
     puts "Please note your member ID: #{new_user.id}. You will need it to view your profile later!"
   end
