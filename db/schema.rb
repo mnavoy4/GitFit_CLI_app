@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 3) do
 
   create_table "gym_sessions", force: :cascade do |t|
-    t.string "name"
     t.integer "member_id"
     t.integer "workout_id"
     t.index ["member_id"], name: "index_gym_sessions_on_member_id"
