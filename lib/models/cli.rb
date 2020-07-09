@@ -23,6 +23,27 @@ class Cli
     puts "See you next time!"
   end
 
+  def edit_member_profile
+    member = sign_in
+    menu = $prompt.select("What would you like to update?") do |menu|
+      menu.choice 'Name'
+      menu.choice 'Goal'
+    end
+    case menu
+    when 'Name'
+      new_name = Member.ask_for_name
+      member.update(:name=>new_name)
+    when 'Goal'
+      new_goal = Member.ask_for_goal
+      member.update(:goal=>new_goal)
+    end
+  end
+
+  def delete_member_profile
+    member = sign_in
+    member.destroy
+  end
+
   def workout
     bar = TTY::ProgressBar.new("Work out in progress [:bar]", total: 30)
     30.times do
@@ -36,7 +57,9 @@ class Cli
     main_menu = $prompt.select("Main Menu") do |menu|
       menu.choice 'Build new profile'
       menu.choice 'See member profile'
+      menu.choice 'Edit member profile'
       menu.choice 'Select your workout'
+      menu.choice 'Delete member profile'
       menu.choice 'Exit GitFit'
     end
     main_menu
@@ -45,7 +68,8 @@ class Cli
 
 
 
-  def select_type_of_workout member
+  def select_type_of_workout
+    member = sign_in
     answer = $prompt.select("Choose your workout") do |menu|
       menu.choice 'Full Body'
       menu.choice 'Chest'
