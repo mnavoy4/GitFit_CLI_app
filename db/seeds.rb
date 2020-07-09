@@ -1,6 +1,6 @@
-Workout.destroy_all
-Member.destroy_all
-GymSession.destroy_all
+# Workout.destroy_all
+# Member.destroy_all
+# GymSession.destroy_all
 
 # michael = Member.create(:name=>"Michael", :goal=>"strength")
 # derek = Member.create(:name=>"Derek", :goal=>"Weight Loss")

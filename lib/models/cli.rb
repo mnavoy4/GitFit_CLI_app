@@ -7,7 +7,7 @@ class Cli
     puts "Welcome to GitFit, your personal workout generator!"
   end
 
-  def new_user
+  def new_member
     Member.create_new
   end
 
@@ -35,7 +35,7 @@ class Cli
   def main_menu
     main_menu = $prompt.select("Main Menu") do |menu|
       menu.choice 'Build new profile'
-      menu.choice 'See user profile'
+      menu.choice 'See member profile'
       menu.choice 'Select your workout'
       menu.choice 'Exit GitFit'
     end
@@ -45,8 +45,7 @@ class Cli
 
 
 
-  def select_type_of_workout user
-    # prompt = TTY::Prompt.new
+  def select_type_of_workout member
     answer = $prompt.select("Choose your workout") do |menu|
       menu.choice 'Full Body'
       menu.choice 'Chest'
@@ -58,6 +57,6 @@ class Cli
     new_session = GymSession.create()
     new_workout = Workout.find_or_create_by(:body_part=>answer)
     new_workout.gym_sessions << new_session
-    user.gym_sessions << new_session
+    member.gym_sessions << new_session
   end
 end

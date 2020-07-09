@@ -7,15 +7,14 @@ app.welcome
 loop do
   case app.main_menu
   when 'Build new profile'
-    app.new_user
+    app.new_member
   when 'Select your workout'
     app.select_type_of_workout app.sign_in
     app.workout
-  when 'See user profile'
+  when 'See member profile'
     app.see_user_profile
   when 'Exit GitFit'
     app.end_app
-    binding.pry
     break
   end
 end
