@@ -18,7 +18,7 @@ class Member < ActiveRecord::Base
     puts "Please note your member ID: #{new_member.id}. You will need it to view your profile and log workouts later!"
   end
 
-  def self.see_user_profile
+  def self.see_member_profile
     member = self.sign_in
     puts "Name: #{member[:name]}"
     puts "Goal: #{member[:goal]}"
