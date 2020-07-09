@@ -11,8 +11,8 @@ class Cli
     Member.create_new
   end
 
-  def see_user_profile
-    Member.see_user_profile
+  def see_member_profile
+    Member.see_member_profile
   end
 
   def sign_in

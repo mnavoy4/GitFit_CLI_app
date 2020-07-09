@@ -12,7 +12,7 @@ loop do
     app.select_type_of_workout app.sign_in
     app.workout
   when 'See member profile'
-    app.see_user_profile
+    app.see_member_profile
   when 'Exit GitFit'
     app.end_app
     break
