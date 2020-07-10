@@ -30,14 +30,14 @@ class Member < ActiveRecord::Base
       puts "Name: #{$signed_in_member[:name]}"
       puts "Member ID: #{$signed_in_member[:id]}"
       puts "Goal: #{$signed_in_member[:goal]}"
-      puts $signed_in_member.get_member_workouts
+      puts $signed_in_member.display_member_workouts_table
     else
       puts "This member ID does not exist."
       self.see_member_profile
     end
   end
 
-  def get_member_workouts
+  def display_member_workouts_table
     hash = {}
     workout_array = self.workouts.map(&:body_part)
     workout_array.each { |value| hash[value] ? hash[value] += 1 : hash[value] = 1 }
