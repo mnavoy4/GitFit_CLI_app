@@ -101,4 +101,4 @@ ___
   
   ### 8. Lisence
   ___
-  [Click here to view](https://github.com/ChefBoyRT/TacoLandia/blob/master/License.txt)
+  [Click here to view](https://github.com/mnavoy4/GitFit_CLI_app/blob/master/License.txt)
