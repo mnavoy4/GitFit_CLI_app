@@ -103,6 +103,6 @@ ___
   ___
   GitFit was created by [Michael Navoy](https://www.linkedin.com/in/michael-navoy/), [Brian Gordon](https://github.com/bgordon8), and [Derek Turner](https://www.linkedin.com/in/derek-turner-1354b71b1/).
   
-  ### 8. Lisence
+  ### 8. License
   ___
   [Click here to view](https://github.com/mnavoy4/GitFit_CLI_app/blob/master/License.txt)
