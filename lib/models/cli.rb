@@ -4,15 +4,20 @@ ActiveRecord::Base.logger = nil
 class Cli
 
   $prompt = TTY::Prompt.new
+  $pastel = Pastel.new
+  TTY::Screen.size
+  
+  font = TTY::Font.new(:doom)
+  puts $pastel.cyan.bold(font.write("GitFit", letter_spacing: 4))
 
   def welcome
-    puts "Welcome to GitFit, your personal workout tracking app!"
+    puts $pastel.green.bold("Welcome to GitFit, your personal workout tracking app!")
   end
 
   def new_member
     new_member = Member.create_new
-    puts "Nice to meet you #{new_member.name}! GitFit is here to help you #{new_member.goal.remove("I want to ")}"
-    puts "Please note your member ID: #{new_member.id}. You will need it to sign in later!"
+    puts $pastel.yellow("Nice to meet you #{new_member.name}! GitFit is here to help you #{new_member.goal.remove("I want to ")}")
+    puts $pastel.yellow("Please note your member ID:" + " " + $pastel.red("#{new_member.id}.") + " " + $pastel.yellow.bold("You will need it to sign in later!"))
     sign_in
   end
 
@@ -21,11 +26,11 @@ class Cli
   end
 
   def end_app
-    puts "See you next time!"
+    puts $pastel.red("See you next time!")
   end
 
   def edit_member_profile
-    menu = $prompt.select("What would you like to update?") do |menu|
+    menu = $prompt.select($pastel.yellow("What would you like to update?")) do |menu|
       menu.choice 'Name'
       menu.choice 'Goal'
     end
@@ -41,21 +46,21 @@ class Cli
 
   def delete_member_profile
     $signed_in_member.destroy
-    puts "Your profile has been deleted"
+    puts $pastel.red("Your profile has been deleted")
     end_app
   end
 
   def workout
-    bar = TTY::ProgressBar.new("Work out in progress [:bar]", total: 30)
+    bar = TTY::ProgressBar.new($pastel.green("Work out in progress [:bar]"), total: 30)
     30.times do
       sleep(0.1)
       bar.advance(1)
     end
-    puts "Great job! You finished your workout."
+    puts $pastel.green("Great job! You finished your workout.")
   end
 
   def display_member_menu
-    member_menu = $prompt.select("Member Menu") do |menu|
+    member_menu = $prompt.select($pastel.yellow("Member Menu")) do |menu|
       menu.choice 'See member profile'
       menu.choice 'Edit member profile'
       menu.choice 'Select your workout'
@@ -86,7 +91,7 @@ class Cli
   end
 
   def create_or_sign_in
-    menu = $prompt.select("Please sign in or create a new account.") do |menu|
+    menu = $prompt.select($pastel.yellow("Please sign in or create a new account.")) do |menu|
       menu.choice 'Build new profile'
       menu.choice 'Sign in'
       menu.choice 'Exit GitFit'
@@ -95,14 +100,14 @@ class Cli
   end
 
   def select_type_of_workout 
-    answer = $prompt.select("Choose your workout") do |menu|
+    answer = $prompt.select($pastel.yellow("Choose your workout")) do |menu|
       menu.choice 'Full Body'
       menu.choice 'Chest'
       menu.choice 'Back'
       menu.choice 'Legs'
       menu.choice 'Arms'
     end
-    puts "You have selected a #{answer} workout."
+    puts $pastel.yellow("You have selected a #{answer} workout.")
     new_session = GymSession.create()
     new_workout = Workout.find_or_create_by(:body_part=>answer)
     new_workout.gym_sessions << new_session
@@ -110,12 +115,12 @@ class Cli
   end
 
   def sign_in
-    puts "Please enter your member ID."
+    puts $pastel.yellow("Please enter your member ID.")
     member_id = gets.chomp
     if Member.find_by id: member_id
       $signed_in_member = Member.find_by id: member_id
     else
-      puts "You have entered an incorrect member ID"
+      puts $pastel.bright_red("You have entered an incorrect member ID")
       exit! if create_or_sign_in == "Exit GitFit"
     end
   end
