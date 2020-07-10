@@ -69,9 +69,9 @@ class Cli
     loop do
       case display_member_menu
         when 'See member profile'
-        see_member_profile
+          see_member_profile
         when 'Edit member profile'
-        edit_member_profile
+          edit_member_profile
         when 'Select your workout'
           select_type_of_workout
           workout

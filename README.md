@@ -2,7 +2,7 @@
 ___
 A great new workout tracking app.
 
-Alt-H Guide
+### Guide 
 ___
   1.  Basic Info
   2.  Demo
@@ -15,11 +15,11 @@ ___
 
 ### 1. Basic Info
 ___
-GitFit is a workout tracking app that helps you track your gym sessions and make progress toward your fitness goals. The app is simple and intuitive to help its users stay focused on getting fit. Each user has a unique profile where their gym sessions are logged and their fitness goals cab be updated as they are achieved. 
+GitFit is a workout tracking app that helps you track your gym sessions and make progress toward your fitness goals. The app is simple and intuitive to help its users stay focused on getting fit. Each user has a unique profile where their gym sessions are logged and their fitness goals can be updated as they are achieved. 
 
 ### 2. Demo
 ___
-Here we can have a video if we make one and also we can just put like some pictures or something
+Here's a video demo of [GitFit](https://www.youtube.com/watch?v=4XssJz04vVM&feature=youtu.be) on YouTube.
 
 ### 3.  Supporting Technologies
 ___
@@ -30,6 +30,7 @@ ___
 - Rake -> 13.0
 - SQLite3 -> 1.4
 - tty-prompt
+- tty-font
 - tty-progressbar
 - tty-table
 
@@ -37,9 +38,10 @@ ___
 ___
 To run GitFit clone it from the GitHub repository and install locally.
 
-Run command:
+Run commands:
 ```
 rake db:migrate
+bundle install
 ```
 
 ### 5. Features
@@ -60,24 +62,26 @@ ___
   end 
   ```
   ```
-    def workout
-    bar = TTY::ProgressBar.new("Work out in progress [:bar]", total: 30)
+  def workout
+    bar = TTY::ProgressBar.new($pastel.green("Work out in progress [:bar]"), total: 30)
     30.times do
       sleep(0.1)
       bar.advance(1)
     end
-    puts "Great job! You finished your workout."
+    puts $pastel.green("Great job! You finished your workout.")
   end
+
   ```
   ```
-def display_member_workouts_table
+  def display_member_workouts_table
     hash = {}
     workout_array = self.workouts.map(&:body_part)
     workout_array.each { |value| hash[value] ? hash[value] += 1 : hash[value] = 1 }
     table = TTY::Table.new ['Body Part','Workouts Completed'], hash.to_a
-    table.render(:ascii)
+    $pastel.cyan.bold(table.render(:ascii))
   end
   ```
+
   ___
 
   ###  6.  Status
@@ -89,8 +93,8 @@ ___
 
   - [x] fix member sign in 
   - [x] add styling 
-  - [ ] complete documentation
-  - [ ] make demo video
+  - [x] complete documentation
+  - [x] make demo video
   - [ ] include descriptions of exercises (maybe with pictures or videos)
   
 
