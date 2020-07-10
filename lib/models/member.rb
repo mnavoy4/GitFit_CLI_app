@@ -22,7 +22,6 @@ class Member < ActiveRecord::Base
       menu.choice 'I want to lose weight.'
       menu.choice 'I want to gain strength.'
     end
-    goal
   end
 
   def self.see_member_profile
@@ -39,12 +38,9 @@ class Member < ActiveRecord::Base
   end
 
   def get_member_workouts
-    table = TTY::Table.new ['Body Part','Workouts Completed'], [['Full Body', ''], ['Chest', 'b2'],['Back', 'a2'], ['Legs', 'b2'], ['Arms', 'b2']]
     hash = {}
     workout_array = self.workouts.map(&:body_part)
     workout_array.each { |value| hash[value] ? hash[value] += 1 : hash[value] = 1 }
-    # hash
-    # binding.pry
     table = TTY::Table.new ['Body Part','Workouts Completed'], hash.to_a
     table.render(:ascii)
   end

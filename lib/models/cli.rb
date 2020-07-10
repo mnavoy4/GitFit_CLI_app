@@ -1,5 +1,6 @@
 require 'pry'
 require 'tty-prompt'
+ActiveRecord::Base.logger = nil
 class Cli
 
   $prompt = TTY::Prompt.new
@@ -18,7 +19,7 @@ class Cli
   def see_member_profile
     Member.see_member_profile
   end
-  
+
   def end_app
     puts "See you next time!"
   end
