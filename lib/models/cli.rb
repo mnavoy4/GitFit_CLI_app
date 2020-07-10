@@ -115,8 +115,13 @@ class Cli
     if Member.find_by id: member_id
       $signed_in_member = Member.find_by id: member_id
     else
-      puts "You have entered an incorrect member ID"
-      exit! if create_or_sign_in == "Exit GitFit"
+      puts "You have entered an incorrect member ID."
+      if create_or_sign_in == "Exit GitFit"
+        end_app
+        exit!
+      elsif create_or_sign_in == "Sign in"
+        sign_in
+      end
     end
   end
 end
