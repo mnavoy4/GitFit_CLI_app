@@ -1,5 +1,6 @@
 require 'pry'
 require 'tty-prompt'
+
 ActiveRecord::Base.logger = nil
 class Cli
 
@@ -74,9 +75,9 @@ class Cli
     loop do
       case display_member_menu
         when 'See member profile'
-        see_member_profile
+          see_member_profile
         when 'Edit member profile'
-        edit_member_profile
+          edit_member_profile
         when 'Select your workout'
           select_type_of_workout
           workout
@@ -106,12 +107,23 @@ class Cli
       menu.choice 'Back'
       menu.choice 'Legs'
       menu.choice 'Arms'
+      menu.choice 'Back to menu'
     end
-    puts $pastel.yellow("You have selected a #{answer} workout.")
-    new_session = GymSession.create()
-    new_workout = Workout.find_or_create_by(:body_part=>answer)
-    new_workout.gym_sessions << new_session
-    $signed_in_member.gym_sessions << new_session
+    if answer === 'Back to menu'
+      navigate_member_menu
+    else
+    workout_type = ''
+      if $signed_in_member.goal == 'I want to lose weight.'
+        workout_type = 'Hypertrophy'
+      else
+        workout_type = "Strength"
+      end
+      puts $pastel.yellow("You have selected a #{answer} workout.")
+      new_session = GymSession.create()
+      new_workout = Workout.find_or_create_by(:body_part => answer, :kind_of_workout => workout_type)
+      new_workout.gym_sessions << new_session
+      $signed_in_member.gym_sessions << new_session
+    end
   end
 
   def sign_in

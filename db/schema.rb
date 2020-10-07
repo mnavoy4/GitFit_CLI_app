@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "workouts", force: :cascade do |t|
     t.string "body_part"
+    t.string "kind_of_workout"
   end
 
 end

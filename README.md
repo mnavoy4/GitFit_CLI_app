@@ -37,9 +37,11 @@ ___
 ___
 To run GitFit clone it from the GitHub repository and install locally.
 
-Run command:
+Run commands:
 ```
+bundle install
 rake db:migrate
+ruby runner.rb
 ```
 
 ### 5. Features
